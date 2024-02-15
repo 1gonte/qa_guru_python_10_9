@@ -7,7 +7,7 @@ from qa_guru_python_10_9.data.users import Users
 
 class RegistrationPage:
     def open(self):
-        browser.open('/')
+        browser.open('/automation-practice-form')
         browser.driver.execute_script("document.querySelector('#fixedban').remove();")
         browser.driver.execute_script("document.querySelector('footer').remove();")
         return self

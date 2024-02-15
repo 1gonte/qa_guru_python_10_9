@@ -19,6 +19,14 @@ class Users:
     city: str
 
 
+@dataclasses.dataclass
+class SimpleUsers:
+    full_name: str
+    email: str
+    current_address: str
+    permanent_address: str
+
+
 student = Users(
     first_name='Georgii',
     last_name='Sergeev',
@@ -34,3 +42,11 @@ student = Users(
     current_address='Moscow, Red Square, 1A',
     state='NCR',
     city='Delhi')
+
+
+george = SimpleUsers(
+    full_name='Georgii Sergeev',
+    email='example@gmail.com',
+    current_address='Moscow, Red Square, 1A',
+    permanent_address='Moscow, Red Square, 1A'
+)
