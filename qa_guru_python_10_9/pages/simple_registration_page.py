@@ -29,7 +29,7 @@ class SimpleRegistrationPage:
         browser.element('#submit').click()
         return self
 
-    def should_have_registered_user_with(self, user: SimpleUsers):
+    def should_have_registered_user(self, user: SimpleUsers):
         browser.element('.border').all('p').should(have.exact_texts(
             f'Name:{user.full_name}',
             f'Email:{user.email}',
