@@ -12,7 +12,7 @@ class Users:
     month_of_birth: str
     day_of_birth: str
     subject: str
-    hobbie: str
+    hobby: str
     photo_name: str
     current_address: str
     state: str
@@ -29,7 +29,7 @@ student = Users(
     month_of_birth='February',
     day_of_birth='16',
     subject='Computer Science',
-    hobbie='Reading',
+    hobby='Reading',
     photo_name='image.png',
     current_address='Moscow, Red Square, 1A',
     state='NCR',

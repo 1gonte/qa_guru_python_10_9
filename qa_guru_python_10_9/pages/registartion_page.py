@@ -1,15 +1,12 @@
-import os
-
-from selene import browser, have, by, be
+from selene import browser, have, by, be, command
 
 from qa_guru_python_10_9.data.users import Users
+from qa_guru_python_10_9.resource import path
 
 
 class RegistrationPage:
     def open(self):
         browser.open('/')
-        browser.driver.execute_script("document.querySelector('#fixedban').remove();")
-        browser.driver.execute_script("document.querySelector('footer').remove();")
         return self
 
     def fill_first_name(self, value):
@@ -21,7 +18,7 @@ class RegistrationPage:
         return self
 
     def fill_email(self, value):
-        browser.element('#userEmail').type('example@gmail.com')
+        browser.element('#userEmail').type(value)
         return self
 
     def set_gender(self, value):
@@ -49,13 +46,12 @@ class RegistrationPage:
             .press_enter()
         return self
 
-    def set_hobbie(self, value):
+    def set_hobby(self, value):
         browser.all('.custom-checkbox').element_by(have.exact_text(value)).click()
         return self
 
     def set_photo(self, name):
-        browser.element('#uploadPicture.form-control-file').send_keys(
-            os.path.abspath(f'resources/{name}'))
+        browser.element('#uploadPicture').send_keys(path(name))
         return self
 
     def fill_current_address(self, value):
@@ -63,7 +59,7 @@ class RegistrationPage:
         return self
 
     def set_state(self, value):
-        browser.element("#state").should(be.clickable).click()
+        browser.element("#state").perform(command.js.scroll_into_view).click()
         browser.element(by.text(value)).should(be.clickable).click()
         return self
 
@@ -73,7 +69,7 @@ class RegistrationPage:
         return self
 
     def submit(self):
-        browser.element('#submit').should(be.clickable).click()
+        browser.element('#submit').perform(command.js.scroll_into_view).click()
         return self
 
     def should_have_registered(self, user: Users):
@@ -85,7 +81,7 @@ class RegistrationPage:
                 user.mobile_number,
                 f'{user.day_of_birth} {user.month_of_birth},{user.year_of_birth}',
                 user.subject,
-                user.hobbie,
+                user.hobby,
                 user.photo_name,
                 user.current_address,
                 f'{user.state} {user.city}',
@@ -100,7 +96,7 @@ class RegistrationPage:
         self.fill_mobile_number(user.mobile_number)
         self.set_date_of_birth(user.year_of_birth, user.month_of_birth, user.day_of_birth)
         self.fill_subject(user.subject)
-        self.set_hobbie(user.hobbie)
+        self.set_hobby(user.hobby)
         self.set_photo(user.photo_name)
         self.fill_current_address(user.current_address)
         self.set_state(user.state)
